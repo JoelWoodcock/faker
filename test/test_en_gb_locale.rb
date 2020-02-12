@@ -29,6 +29,12 @@ class TestEnGbLocale < Test::Unit::TestCase
     assert_equal '0', phone[0]
   end
 
+  def test_en_gb_phone_is_valid
+    phone = Faker::PhoneNumber.phone_number.gsub(/\D/, '')
+    assert_match(/0[12358]\d{8,9}/, phone)
+    refute_equal(/0[04679]\d{8,9}/, phone)
+  end
+
   def test_en_gb_cell_phone_starts_with_zero
     mobile = Faker::PhoneNumber.cell_phone.gsub(/\D/, '')
     assert_equal '0', mobile[0]
