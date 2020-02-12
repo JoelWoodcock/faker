@@ -32,7 +32,7 @@ class TestFakerName < Test::Unit::TestCase
   end
 
   def test_last_name
-    assert @tester.last_name.match(/(\w+\.? ?){3,4}/)
+    assert @tester.last_name.match(/^[A-Z][a-zA-Z]+$/)
   end
 
   def test_prefix
