@@ -24,27 +24,27 @@ class TestEnGbLocale < Test::Unit::TestCase
     assert Faker::Internet.domain_suffix.is_a? String
   end
 
-  def test_en_gb_phone_starts_with_zero
+  def test_en_gb_phone_does_not_start_with_zero
     phone = Faker::PhoneNumber.phone_number.gsub(/\D/, '')
-    assert_equal '0', phone[0]
+    refute_equal '0', phone[0]
   end
 
   def test_en_gb_phone_is_valid
     phone = Faker::PhoneNumber.phone_number.gsub(/\D/, '')
-    assert_match(/0[12358]\d{8,9}/, phone)
-    refute_equal(/0[04679]\d{8,9}/, phone)
+    assert_match(/[12358]\d{8,9}/, phone)
+    refute_equal(/[04679]\d{8,9}/, phone)
   end
 
-  def test_en_gb_cell_phone_starts_with_zero
+  def test_en_gb_cell_phone_does_not_start_with_zero
     mobile = Faker::PhoneNumber.cell_phone.gsub(/\D/, '')
-    assert_equal '0', mobile[0]
+    refute_equal '0', mobile[0]
   end
 
   def test_en_gb_cell_phone_is_valid
     mobile = Faker::PhoneNumber.cell_phone.gsub(/\D/, '')
-    assert_match(/07[13456789]\d{8}/, mobile)
+    assert_match(/7[13456789]\d{8}/, mobile)
     # Pager numbers begin with 070 and 076xx. 07624 is used for mobiles on the Isle of Man
-    refute_equal(/076(?!24)\d{8}|070\d{8}/, mobile)
+    refute_equal(/76(?!24)\d{8}|70\d{8}/, mobile)
   end
 
   def test_en_gb_postcode_has_outcode_and_incode
